@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: "https://music-web.onrender.com/",
+    origin: "https://music-web-client.onrender.com",
   })
 );
 app.use("/api", router);
