@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 
-export const API_URL = "https://music-web-node-app.onrender.com/api";
+export const API_URL = "https://music-web-server.onrender.com";
 
 const $api = axios.create({
   withCredentials: true,
