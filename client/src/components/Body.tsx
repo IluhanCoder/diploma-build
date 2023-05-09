@@ -29,6 +29,7 @@ function Body() {
   return (
     <>
       <Routes>
+         <Route path="/" element={<Events type={"submited"} />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/reg" element={<RegForm />} />
         <Route path="/profile" element={<Profile />} />
