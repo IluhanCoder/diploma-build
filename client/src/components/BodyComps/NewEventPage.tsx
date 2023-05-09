@@ -23,7 +23,7 @@ export const AddEventForm: FC = () => {
   const [avatar, setAvatar] = useState<File>(new File(["none"], "none"));
 
   const navigate = useNavigate();
-  const url = API_URL.replace("/api", "");
+  const url = API_URL!.replace("/api", "");
 
   const { store } = useContext(Context);
   const newEventHandler = async () => {

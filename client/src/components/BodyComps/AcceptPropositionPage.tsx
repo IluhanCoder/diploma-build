@@ -25,7 +25,7 @@ type extraItem = {
 };
 
 const AcceptPropositionPage: React.FC = () => {
-  let url = API_URL.replace("/api", "");
+  let url = API_URL!.replace("/api", "");
 
   const navigate = useNavigate();
 

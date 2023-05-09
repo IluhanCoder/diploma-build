@@ -14,7 +14,7 @@ type LocalParams = {
 };
 
 const UsersMapper = ({ users, rated }: LocalParams) => {
-  const url = API_URL.replace("/api", "");
+  const url = API_URL!.replace("/api", "");
   const { store } = useContext(Context);
 
   return (

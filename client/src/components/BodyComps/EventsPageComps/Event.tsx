@@ -18,7 +18,7 @@ type LocalProps = {
   event: IEvent;
 };
 
-const url = API_URL.replace("/api", "");
+const url = API_URL!.replace("/api", "");
 
 export const Event = ({ event }: LocalProps) => {
   return (

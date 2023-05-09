@@ -12,7 +12,7 @@ const ChatsPage = () => {
   const [chats, setChats] = useState<IChat[]>([]);
   const [unreadCount, setUnreadCount] = useState<number>(0);
 
-  let url = API_URL.replace("/api", "");
+  let url = API_URL!.replace("/api", "");
 
   const getData = () => {
     ChatService.getUserChats(store.user._id).then((res) => setChats(res.data));

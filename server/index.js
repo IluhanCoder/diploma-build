@@ -8,6 +8,8 @@ const errorMiddleware = require("./middlewares/error-middleware");
 const path = require("path");
 const fileupload = require("express-fileupload");
 
+const CLIENT_URL = process.env.CLIENT_URL;
+
 const PORT = process.env.PORT || 5000;
 const app = express();
 
@@ -16,7 +18,7 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: "https://music-web.onrender.com",
+    origin:CLIENT_URL,
   })
 );
 app.use("/api", router);

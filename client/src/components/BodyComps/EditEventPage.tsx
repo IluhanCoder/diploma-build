@@ -30,7 +30,7 @@ const EditEventPage = () => {
   const navigate = useNavigate();
   const { store } = useContext(Context);
 
-  const url = API_URL.replace("/api", "");
+  const url = API_URL!.replace("/api", "");
 
   const getData = () => {
     EventService.getEvent(eventId!).then((res) => {

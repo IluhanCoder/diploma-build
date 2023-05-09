@@ -29,7 +29,7 @@ type LocalParams = {
   eventId: string;
 };
 
-const url = API_URL.replace("/api", "");
+const url = API_URL!.replace("/api", "");
 
 const EventPage = () => {
   const { store } = useContext(Context);

@@ -178,6 +178,8 @@ router.delete("/comment/:commentId", commentController.deleteComment);
 
 router.get("/invite-exists/:eventId", inviteController.eventInviteExists);
 
+router.get("/auth", userController.getAuth);
+
 router.get("/invite/:receiverId/:eventId", inviteController.getInvite);
 // router.get("/activate/:link", userController.activate);
 

@@ -1,24 +1,20 @@
 const jwt = require("jsonwebtoken");
 const tokenModel = require("../models/token-model");
+const { Types, Mongoose } = require("mongoose");
 
 class TokenService {
-  generateTokens(payload) {
-    const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {
-      expiresIn: "30m",
-    });
-    const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {
-      expiresIn: "30d",
-    });
-    return {
-      accessToken,
-      refreshToken,
-    };
+  async generateToken(userId) {
+    const token = jwt.sign({ _id: userId }, process.env.TOKEN_SECRET);
+    await tokenModel.create({ token, user: Types.ObjectId(userId) });
+    return token;
   }
 
-  validateAccessToken(token) {
+  async validateToken(token) {
     try {
-      const userData = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
-      return userData;
+      const candidateToken = await tokenModel.find({ token });
+      if (candidateToken == undefined) throw ApiError.UnauthorizedError();
+      const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+      return decoded;
     } catch (error) {
       return null;
     }

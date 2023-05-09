@@ -9,6 +9,8 @@ const userModel = require("../models/user-model");
 const eventService = require("./event-service");
 const eventModel = require("../models/event-model");
 const feedbackService = require("./feedback-service");
+const tokenModel = require("../models/token-model");
+const { Types, Mongoose } = require("mongoose");
 
 class UserService {
   async registration(
@@ -41,7 +43,6 @@ class UserService {
       );
     }
     const hashPassword = await bcrypt.hash(password, 3);
-    const activationLink = uuid.v4();
     const user = await UserModel.create({
       login: login,
       name,
@@ -55,13 +56,11 @@ class UserService {
       genres,
       instruments,
     });
-    const userDto = new UserDto(user);
-    const tokens = tokenService.generateTokens({ ...userDto });
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+    const token = tokenService.generateToken(user._id);
 
     return {
-      ...tokens,
-      user: userDto,
+      token,
+      user
     };
   }
 
@@ -74,14 +73,12 @@ class UserService {
     if (!isEquals) {
       throw ApiError.BadRequest("Неправильний пароль");
     }
-    const userDto = new UserDto(user);
-    const tokens = tokenService.generateTokens({ ...userDto });
-
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+    // const userDto = new UserDto(user);
+    const token = await tokenService.generateToken(user._id);
 
     return {
-      ...tokens,
-      user: userDto,
+      token,
+      user,
     };
   }
 
@@ -101,7 +98,7 @@ class UserService {
     }
     const user = await UserModel.findById(userData._id);
     const userDto = new UserDto(user);
-    const tokens = tokenService.generateTokens({ ...userDto });
+    const tokens = tokenService.generateToken({ ...userDto });
 
     await tokenService.saveToken(userDto._id, tokens.refreshToken);
 
@@ -220,6 +217,13 @@ class UserService {
       proposData.push({ user, event });
     });
     return proposData;
+  }
+
+  async getAuth(token) {
+    const candidateToken = await tokenModel.findOne({ token });
+    if (candidateToken === null) throw ApiError.UnauthorizedError();
+    const validatedData = await tokenService.validateToken(token);
+    return await userModel.findById(Types.ObjectId(validatedData._id));
   }
 }
 

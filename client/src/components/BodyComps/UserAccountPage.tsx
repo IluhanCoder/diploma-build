@@ -38,7 +38,7 @@ export const Profile = () => {
     setGender(currentUser.gender);
   }, [currentUser, editMode]);
 
-  let url = API_URL.replace("/api", "");
+  let url = API_URL!.replace("/api", "");
 
   return (
     <div className="flex justify-center bg-gray-100">

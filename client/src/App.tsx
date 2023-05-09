@@ -9,11 +9,15 @@ import "./index.css";
 const App: FC = () => {
   const { store } = useContext(Context);
 
-  useEffect(() => {
+  const authConfirm = async () => {
     if (localStorage.getItem("token")) {
-      store.checkAuth();
+      await store.checkAuth();
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    authConfirm();
+  }, [store.isAuth]);
 
   return (
     <Router>

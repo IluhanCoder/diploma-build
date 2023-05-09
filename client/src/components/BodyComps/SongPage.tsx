@@ -23,7 +23,7 @@ const SongPage = () => {
     desc: string;
   };
 
-  const url = API_URL.replace("/api", "");
+  const url = API_URL!.replace("/api", "");
   const [name, setName] = useState<string>();
   const [tempo, setTempo] = useState<number>();
   const [author, setAuthor] = useState<string>();

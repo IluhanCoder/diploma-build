@@ -7,7 +7,7 @@ export default class AuthService {
   static async loginF(
     email: string,
     password: string
-  ): Promise<AxiosResponse<AuthResponse>> {
+  ) {
     return $api.post("/login", { email, password });
   }
 
@@ -23,7 +23,7 @@ export default class AuthService {
     gender: string,
     genres: string[],
     instruments: string[]
-  ): Promise<AxiosResponse<AuthResponse>> {
+  ) {
     return $api.post("/registration", {
       login: login,
       name,

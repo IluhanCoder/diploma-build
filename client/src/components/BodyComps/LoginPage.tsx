@@ -33,7 +33,7 @@ export const LoginForm: FC = () => {
         <div className="bg-white px-6 py-8 rounded drop-shadow-lg text-black w-full">
           <h1 className="p-2 text-3xl text-center">Вхід в обліковий запис</h1>
           <div className="p-2 flex flex-col justify-center text-red-400 gap-2">
-            {errorMessages.map((error) => {
+            {errorMessages!.map((error) => {
               return (
                 <div key={errorMessages.indexOf(error)} className="text-center">
                   {error}

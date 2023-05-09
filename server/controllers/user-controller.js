@@ -42,11 +42,7 @@ class UserController {
         genres,
         instruments
       );
-      res.cookie("refreshToken", userData.refreshToken, {
-        maxAge: 30 * 24 * 60 * 60 * 1000,
-        httpOnly: true,
-      });
-      return res.status(200).json(userData);
+      return res.status(200).json({ ...userData });
     } catch (error) {
       next(error);
     }
@@ -56,10 +52,6 @@ class UserController {
     try {
       const { email, password } = req.body;
       const userData = await userService.loginF(email, password);
-      res.cookie("refreshToken", userData.refreshToken, {
-        maxAge: 30 * 24 * 60 * 60 * 1000,
-        httpOnly: true,
-      });
       return res.status(200).json(userData);
     } catch (error) {
       next(error);
@@ -211,6 +203,17 @@ class UserController {
       const propositions = req.body;
       const proposData = await userService.getPropositions(propositions);
       return res.status(200).json(proposData);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getAuth(req, res, next) {
+    try {
+      const authHeader = req.headers["authorization"];
+      const token = authHeader && authHeader.split(" ")[1];
+      const userData = await userService.getAuth(token);
+      return res.json({ user: userData, token });
     } catch (error) {
       next(error);
     }

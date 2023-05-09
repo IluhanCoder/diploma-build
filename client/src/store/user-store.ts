@@ -5,6 +5,7 @@ import axios from "axios";
 import { AuthResponse } from "../models/response/AuthResponse";
 import { API_URL } from "../http";
 import UserService from "../services/UserService";
+import $api from "../http";
 
 export default class Store {
   user = {} as IUser;
@@ -25,7 +26,7 @@ export default class Store {
   async loginF(email: string, password: string) {
     try {
       const response = await AuthService.loginF(email, password);
-      localStorage.setItem("token", response.data.accessToken);
+      localStorage.setItem("token", response.data.token);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (error: any) {
@@ -81,10 +82,12 @@ export default class Store {
 
   async checkAuth() {
     try {
-      const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {
+      const API_URL = process.env.REACT_APP_API_URL;
+      const response = await $api.get(`${API_URL}/auth`, {
         withCredentials: true,
       });
-      localStorage.setItem("token", response.data.accessToken);
+      console.log(response.data);
+      localStorage.setItem("token", response.data.token);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (error: any) {

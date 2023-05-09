@@ -30,7 +30,7 @@ import { ImCross } from "react-icons/im";
 import ArrayMapper from "../UniversalComps/ArrayMapper";
 
 const UserPage: React.FC = () => {
-  let url = API_URL.replace("/api", "");
+  let url = API_URL!.replace("/api", "");
 
   const { store } = useContext(Context);
 
