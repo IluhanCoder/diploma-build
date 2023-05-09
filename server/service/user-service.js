@@ -151,7 +151,7 @@ class UserService {
 
   async setAvatar(filePath, userData) {
     const filter = { _id: userData._id };
-    let fileStr = filePath.replace("images\\", "");
+    let fileStr = filePath.replace("images/", "");
     const updateDocument = {
       $set: {
         avatar: fileStr,
