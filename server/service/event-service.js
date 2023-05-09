@@ -209,7 +209,7 @@ class EventService {
   async setAvatar(filePath, eventId) {
     const convertedEventId = Mongoose.Types.ObjectId(eventId);
     const filter = { _id: convertedEventId };
-    let fileStr = filePath.replace("images\\", "");
+    let fileStr = filePath.replace("images/", "");
     const updateDocument = {
       $set: {
         avatar: fileStr,

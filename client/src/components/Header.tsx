@@ -12,7 +12,7 @@ import ChatService from "../services/ChatService";
 function Header() {
   const { store } = useContext(Context);
 
-  const [unreadMessagesCount, setUnreadMessagesCount] = useState<Number>(0);
+  const [unreadMessagesCount, setUnreadMessagesCount] = useState<number>(0);
 
   const getData = () => {
     ChatService.getUnreadCount(store.user._id).then((res) => {
