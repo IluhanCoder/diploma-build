@@ -61,7 +61,7 @@ export default class Store {
         genres,
         instruments
       );
-      localStorage.setItem("token", response.data.accessToken);
+      localStorage.setItem("token", response.data.token);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (error: any) {
