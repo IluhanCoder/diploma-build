@@ -62,7 +62,7 @@ class InviteService {
     if (accept) {
       const convertedReceiverId = Mongoose.Types.ObjectId(invite.receiverId);
       await eventModel.updateOne(
-        { _id: Mongoose.Types.ObjectId(invite.eventId) },,
+        { _id: Mongoose.Types.ObjectId(invite.eventId) },
         {
           $push: {
             participants: {
