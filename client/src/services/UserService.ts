@@ -4,7 +4,7 @@ import { IUser } from "../models/IUser";
 import { IEvent } from "../models/IEvent";
 import { ITicket } from "../models/ITicket";
 
-const adminId = "63ff1a986c9e8cad435d114e";
+const adminId = "645a4a376e925a9759e40117";
 
 export default class UserService {
   static getUsers(rated: boolean): Promise<AxiosResponse<IUser[]>> {
