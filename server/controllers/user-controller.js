@@ -106,7 +106,7 @@ class UserController {
       const token = tokenBearer[1];
       const file = req.file;
       if (req.file) {
-        const user = tokenService.validateAccessToken(token);
+        const user = await tokenService.validateToken(token);
         await userService.setAvatar(file.path, user);
         res.json(file);
       }

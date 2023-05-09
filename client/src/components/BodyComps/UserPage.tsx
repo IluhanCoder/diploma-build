@@ -72,7 +72,7 @@ const UserPage: React.FC = () => {
       instruments!
     );
     await UserService.changeAvatar(avatar!);
-    // window.location.reload();
+    window.location.reload();
   };
 
   const getData = async () => {
